@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {ButtonsModule} from "ngx-bootstrap";
+import {MomentModule} from "angular2-moment";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {ButtonsModule} from "ngx-bootstrap";
     BrowserModule,
     FormsModule,
     HttpModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
