@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {ButtonsModule} from "ngx-bootstrap";
 import {MomentModule} from "angular2-moment";
+import {TilesModule} from "./tiles/tiles.module";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {MomentModule} from "angular2-moment";
     FormsModule,
     HttpModule,
     ButtonsModule.forRoot(),
-    MomentModule
+    MomentModule,
+    TilesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
