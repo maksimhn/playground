@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-charts-tile',
@@ -8,15 +7,10 @@ import { Router } from '@angular/router';
 })
 export class ChartsTileComponent implements OnInit {
 
-  constructor(private router: Router) {
-    this.router = router;
+  constructor() {
   }
 
   ngOnInit() {
-  }
-
-  goToApplet() {
-    this.router.navigate([ './charts' ]);
   }
 
 }

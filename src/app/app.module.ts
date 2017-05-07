@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     { path: 'tiles', component: TilesComponent },
     { path: '',
       redirectTo: '/tiles',
-      pathMatch: 'full'
+      pathMatch: 'prefix'
     }
   ];
 
