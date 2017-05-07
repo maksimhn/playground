@@ -1,8 +1,8 @@
 <div class="row">
 
   <!--Charts-->
-  <div *ngFor="let tile of tilesList" class="col-xs-1 col-sm-6 col-md-4">
-    <div class="tile-container">
+  <div *ngFor="let tile of tilesList" class="col-xs-12 col-sm-6 col-md-4">
+    <div class="tile">
       <a routerLink="{{tile.link}}" routerLinkActive="active">{{tile.name}}</a>
     </div>
   </div>

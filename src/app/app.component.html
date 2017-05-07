@@ -10,8 +10,21 @@
   </div>
 </div>
 
+<!--Back to tiles button-->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-success"
+              *ngIf="showBackToTilesButton()"
+              routerLink="/tiles"
+              routerLinkActive="active"
+      >Back to tiles</button>
+    </div>
+  </div>
+</div>
+
 <!--list of tiles-->
-<div class="container round-borders">
+<div class="container round-borders tiles-container-div">
   <router-outlet></router-outlet>
 </div>
 

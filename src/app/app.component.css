@@ -3,3 +3,8 @@
   border-radius: 5px;
   padding: 20px;
 }
+
+.tiles-container-div {
+  /*display: flex;*/
+  /*justify-content: space-around;*/
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StaticTextService } from './services/static-text.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,13 @@ export class AppComponent {
   title: string;
   aboutMe: string;
 
-  constructor(staticTextService: StaticTextService) {
+  constructor(staticTextService: StaticTextService, private _router: Router) {
     this.aboutMe = staticTextService.getAboutMe();
     this.title = staticTextService.getTitle();
     this.copyRight = staticTextService.getCopyRight();
+  }
+
+  showBackToTilesButton() {
+    return this._router.url !== '/tiles';
   }
 }
