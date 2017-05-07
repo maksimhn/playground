@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { TilesComponent } from './tiles.component';
 import { ChartsTileComponent } from './charts-tile/charts-tile.component';
 import { BotTileComponent } from './bot-tile/bot-tile.component';
@@ -12,7 +13,8 @@ import { ImageTileComponent } from './image-tile/image-tile.component';
   imports: [
     CommonModule
   ],
-  declarations: [TilesComponent, ChartsTileComponent, BotTileComponent, ReportTileComponent, PlayerTileComponent, VoiceTileComponent, ImageTileComponent],
-  exports: [TilesComponent]
+  declarations: [ TilesComponent, ChartsTileComponent, BotTileComponent, ReportTileComponent, PlayerTileComponent, VoiceTileComponent, ImageTileComponent ],
+  exports: [ TilesComponent ]
 })
-export class TilesModule { }
+export class TilesModule {
+}

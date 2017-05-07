@@ -2,11 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import {ButtonsModule} from "ngx-bootstrap";
-import {MomentModule} from "angular2-moment";
-import {TilesModule} from "./tiles/tiles.module";
+import { ButtonsModule } from 'ngx-bootstrap';
+import { MomentModule } from 'angular2-moment';
+import { TilesModule } from './tiles/tiles.module';
+import { ChartsAppletComponent } from './applets/charts-applet/charts-applet.component';
+import { AppletsModule } from './applets/applets.module';
+import { TilesComponent } from './tiles/tiles.component';
+
+const appRoutes: Routes = [
+    { path: 'charts', component: ChartsAppletComponent },
+    { path: 'tiles', component: TilesComponent },
+    { path: '',
+      redirectTo: '/tiles',
+      pathMatch: 'full'
+    }
+  ];
 
 @NgModule({
   declarations: [
@@ -18,9 +31,12 @@ import {TilesModule} from "./tiles/tiles.module";
     HttpModule,
     ButtonsModule.forRoot(),
     MomentModule,
-    TilesModule
+    AppletsModule,
+    TilesModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}
