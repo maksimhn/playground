@@ -7,11 +7,12 @@ import { ReportAppletComponent } from './report-applet/report-applet.component';
 import { PlayerAppletComponent } from './player-applet/player-applet.component';
 import { VoiceAppletComponent } from './voice-applet/voice-applet.component';
 import { ImageAppletComponent } from './image-applet/image-applet.component';
+import { nvD3 } from 'ng2-nvd3';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [AppletsComponent, ChartsAppletComponent, BotAppletComponent, ReportAppletComponent, PlayerAppletComponent, VoiceAppletComponent, ImageAppletComponent]
+  declarations: [AppletsComponent, ChartsAppletComponent, BotAppletComponent, ReportAppletComponent, PlayerAppletComponent, VoiceAppletComponent, ImageAppletComponent, nvD3]
 })
 export class AppletsModule { }

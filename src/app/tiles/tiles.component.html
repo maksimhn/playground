@@ -1,12 +1,12 @@
 <div class="row">
 
-  <!--Charts-->
-  <div *ngFor="let tile of tilesList" class="col-xs-12 col-sm-6 col-md-4">
-    <div class="tile">
-      <a routerLink="{{tile.link}}" routerLinkActive="active">{{tile.name}}</a>
-    </div>
+  <div *ngFor="let tile of tilesList" class="col-xs-12 col-sm-6 col-md-4 tile-wrapper-div">
+    <a routerLink="{{tile.link}}" routerLinkActive="active">
+      <div class="tile">
+        {{tile.name}}
+      </div>
+    </a>
   </div>
-
 
 </div>
 
