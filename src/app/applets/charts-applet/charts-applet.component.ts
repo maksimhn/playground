@@ -1,88 +1,117 @@
-import { Component, OnInit } from '@angular/core';
-declare let d3: any;
+import { Component, ElementRef, NgZone, OnDestroy, OnInit } from '@angular/core';
+
+import { D3Service, D3, RGBColor, Selection, Timer, VoronoiPolygon } from 'd3-ng2-service';
 
 @Component({
   selector: 'app-charts-applet',
   templateUrl: './charts-applet.component.html',
-  styleUrls: [ './charts-applet.component.css' ]
+  styleUrls: ['./charts-applet.component.css']
 })
-export class ChartsAppletComponent implements OnInit {
-  options: any;
-  data: any;
+export class ChartsAppletComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  private d3: D3;
+  private parentNativeElement: any;
+  private timer: Timer;
+
+  constructor(element: ElementRef, private ngZone: NgZone, d3Service: D3Service) {
+    this.d3 = d3Service.getD3();
+    this.parentNativeElement = element.nativeElement;
+  }
+
+  ngOnDestroy() {
+    this.ngZone.runOutsideAngular(() => {
+      this.timer.stop();
+    });
   }
 
   ngOnInit() {
-    this.options = {
-      chart: {
-        type: 'discreteBarChart',
-        height: 450,
-        margin: {
-          top: 20,
-          right: 20,
-          bottom: 50,
-          left: 55
-        },
-        x: function (d) {
-          return d.label;
-        },
-        y: function (d) {
-          return d.value;
-        },
-        showValues: true,
-        valueFormat: function (d) {
-          return d3.format(',.4f')(d);
-        },
-        duration: 500,
-        xAxis: {
-          axisLabel: 'X Axis'
-        },
-        yAxis: {
-          axisLabel: 'Y Axis',
-          axisLabelDistance: -10
+    let d3 = this.d3;
+    let d3ParentElement: Selection<HTMLElement, any, null, undefined>;
+    let canvas: HTMLCanvasElement;
+    let context: CanvasRenderingContext2D;
+    let width: number;
+    let height: number;
+    let sites: Array<[number, number]>;
+    let cells: Array<VoronoiPolygon<[number, number]>>;
+    let formatHex: (n: number) => string;
+    let colors: Array<RGBColor>;
+
+    function drawCell(cell: VoronoiPolygon<[number, number]>): void {
+      context.moveTo(cell[0][0], cell[0][1]);
+      for (let i = 1, n = cell.length; i < n; ++i) {
+        context.lineTo(cell[i][0], cell[i][1]);
+      }
+      context.closePath();
+    }
+
+    function distance(a: [number, number], b: [number, number]): number {
+      let dx = a[0] - b[0], dy = a[1] - b[1];
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    if (this.parentNativeElement !== null) {
+
+      d3ParentElement = d3.select(this.parentNativeElement);
+      canvas = d3ParentElement.select<HTMLCanvasElement>('canvas').node();
+
+      width = canvas.width;
+      height = canvas.height;
+
+      context = canvas.getContext('2d');
+
+      sites = d3.range(100).map(function (): [number, number] { return [Math.random() * width, Math.random() * height]; });
+
+      cells = d3.voronoi().size([width, height]).polygons(sites);
+      formatHex = d3.format('02x');
+
+      colors = d3.range(256)
+        .map(d3.scaleSequential(d3.interpolateRainbow).domain([0, 255]))
+        .map(function (c) { return d3.rgb(c); });
+
+      for (let i = 0; i < 256; ++i) {
+        context.beginPath();
+        cells.forEach(function (cell: VoronoiPolygon<[number, number]>) {
+          drawCell(cell);
+          let p0 = cell.shift();
+          let p1 = cell[0];
+          let t = Math.min(0.5, 4 / distance(p0, p1));
+          let p2: [number, number] = [p0[0] * (1 - t) + p1[0] * t, p0[1] * (1 - t) + p1[1] * t];
+          cell.push(p2);
+        });
+        context.fillStyle = '#' + formatHex(i) + '0000';
+        context.fill();
+      }
+
+      let source = context.getImageData(0, 0, width, height).data,
+        targetBuffer = context.createImageData(width, height),
+        target = targetBuffer.data;
+
+      for (let i = 0, y = 0; y < height; ++y) {
+        for (let x = 0; x < width; ++x, i += 4) {
+          target[i + 0] =
+            target[i + 1] =
+              target[i + 2] =
+                target[i + 3] = 255;
         }
       }
-    };
-    this.data = [
-      {
-        key: 'Cumulative Return',
-        values: [
-          {
-            'label': 'A',
-            'value': -29.765957771107
-          },
-          {
-            'label': 'B',
-            'value': 0
-          },
-          {
-            'label': 'C',
-            'value': 32.807804682612
-          },
-          {
-            'label': 'D',
-            'value': 196.45946739256
-          },
-          {
-            'label': 'E',
-            'value': 0.19434030906893
-          },
-          {
-            'label': 'F',
-            'value': -98.079782601442
-          },
-          {
-            'label': 'G',
-            'value': -13.925743130903
-          },
-          {
-            'label': 'H',
-            'value': -5.1387322875705
+
+      context.clearRect(0, 0, width, height);
+
+      this.ngZone.runOutsideAngular(() => {
+        this.timer = d3.timer(function (elapsed) {
+          for (let i = 0, y = 0; y < height; ++y) {
+            for (let x = 0; x < width; ++x, i += 4) {
+              let c = colors[Math.floor(source[i] + elapsed / 10) % 256];
+              target[i + 0] = c.r;
+              target[i + 1] = c.g;
+              target[i + 2] = c.b;
+            }
           }
-        ]
-      }
-    ];
+          context.putImageData(targetBuffer, 0, 0);
+        });
+      });
+
+    }
   }
 
 }
