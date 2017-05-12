@@ -74,7 +74,7 @@ export class ChartsAppletComponent implements OnInit, OnDestroy {
           drawCell(cell);
           let p0 = cell.shift();
           let p1 = cell[0];
-          let t = Math.min(0.5, 4 / distance(p0, p1));
+          let t = Math.min(0.5, 7 / distance(p0, p1));
           let p2: [number, number] = [p0[0] * (1 - t) + p1[0] * t, p0[1] * (1 - t) + p1[1] * t];
           cell.push(p2);
         });
