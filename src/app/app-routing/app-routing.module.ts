@@ -7,6 +7,8 @@ import { VoiceAppletComponent } from '../applets/voice-applet/voice-applet.compo
 import { ReportAppletComponent } from '../applets/report-applet/report-applet.component';
 import { PlayerAppletComponent } from '../applets/player-applet/player-applet.component';
 import { TilesComponent } from '../tiles/tiles.component';
+import { ErrorPageComponent } from '../shared/error-page/error-page.component';
+import { ErrorPageModule } from '../shared/error-page/error-page.module';
 
 const appRoutes: Routes = [
   {path: 'charts', component: ChartsAppletComponent},
@@ -20,12 +22,13 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/tiles',
     pathMatch: 'prefix'
-  }
+  },
+  {path: '**', component: ErrorPageComponent}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes), ErrorPageModule
   ],
   exports: [ RouterModule ]
 })
