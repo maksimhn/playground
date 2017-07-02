@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class StaticTextService {
-  tilesList: Array<{id: number, name: string, link: string}>;
+  multi: { 'name': string; 'series': { 'name': string; 'value': number; }[]; }[];
+  single: { 'name': string; 'value': number; }[];
+  botDescription: string;
+  tilesList: Array<{ id: number, name: string, link: string }>;
   copyRight: string;
   title: string;
   aboutMe: string;
+
+
 
   constructor() {
     this.title = 'This is a demo app and it showcases Pika\'s powers!';
@@ -42,7 +47,67 @@ export class StaticTextService {
         name: 'Player',
         link: '/player'
       }
-    ]
+    ];
+    this.botDescription = 'Yes, his name is quite original, I\'m well aware! But frankly he doesn\'t deserve a better name yet for he is not the sharpest knife in the drawer... Ask him about weather, he seems to like this topic for some reason... He also has a memory of a goldfish so if you reload this page he\'ll forget everything.';
+
+    this.single = [
+      {
+        'name': 'Germany',
+        'value': 8940000
+      },
+      {
+        'name': 'USA',
+        'value': 5000000
+      },
+      {
+        'name': 'France',
+        'value': 7200000
+      }
+    ];
+
+    this.multi = [
+      {
+        'name': 'Germany',
+        'series': [
+          {
+            'name': '2010',
+            'value': 7300000
+          },
+          {
+            'name': '2011',
+            'value': 8940000
+          }
+        ]
+      },
+
+      {
+        'name': 'USA',
+        'series': [
+          {
+            'name': '2010',
+            'value': 7870000
+          },
+          {
+            'name': '2011',
+            'value': 8270000
+          }
+        ]
+      },
+
+      {
+        'name': 'France',
+        'series': [
+          {
+            'name': '2010',
+            'value': 5000002
+          },
+          {
+            'name': '2011',
+            'value': 5800000
+          }
+        ]
+      }
+    ];
   }
 
   getAboutMe() {
@@ -59,6 +124,18 @@ export class StaticTextService {
 
   getTilesList() {
     return this.tilesList;
+  }
+
+  getBotDescription() {
+    return this.botDescription;
+  }
+
+  getChartsDataSingle() {
+    return this.single;
+  }
+
+  getChartsDataMulti() {
+    return this.multi;
   }
 
 }

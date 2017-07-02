@@ -7,13 +7,14 @@ import { ReportAppletComponent } from './report-applet/report-applet.component';
 import { PlayerAppletComponent } from './player-applet/player-applet.component';
 import { VoiceAppletComponent } from './voice-applet/voice-applet.component';
 import { ImageAppletComponent } from './image-applet/image-applet.component';
-import { D3Service } from 'd3-ng2-service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    NgxChartsModule
   ],
-  declarations: [AppletsComponent, ChartsAppletComponent, BotAppletComponent, ReportAppletComponent, PlayerAppletComponent, VoiceAppletComponent, ImageAppletComponent],
-  providers: [D3Service]
+  declarations: [ AppletsComponent, ChartsAppletComponent, BotAppletComponent, ReportAppletComponent, PlayerAppletComponent, VoiceAppletComponent, ImageAppletComponent ]
 })
-export class AppletsModule { }
+export class AppletsModule {
+}
