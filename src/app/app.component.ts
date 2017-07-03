@@ -13,10 +13,10 @@ export class AppComponent {
   title: string;
   aboutMe: string;
 
-  constructor(staticTextService: StaticTextService, private _router: Router) {
-    this.aboutMe = staticTextService.getAboutMe();
-    this.title = staticTextService.getTitle();
-    this.copyRight = staticTextService.getCopyRight();
+  constructor(_staticTextService: StaticTextService, private _router: Router) {
+    this.aboutMe = _staticTextService.getAboutMe();
+    this.title = _staticTextService.getTitle();
+    this.copyRight = _staticTextService.getCopyRight();
   }
 
   showBackToTilesButton() {

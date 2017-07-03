@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class StaticTextService {
+  playerIntro: string;
   multi: { 'name': string; 'series': { 'name': string; 'value': number; }[]; }[];
   single: { 'name': string; 'value': number; }[];
   botDescription: string;
@@ -110,7 +111,9 @@ export class StaticTextService {
       }
     ];
 
-    this.chartsIntro = "I love data visualization! On the most recent project I enjoyed working with Kendo.UI library, but I can work with Chart.js, D3.js and others.";
+    this.chartsIntro = 'I love data visualization! On the most recent project I enjoyed working with Kendo.UI library, but I can work with Chart.js, D3.js and others.';
+
+    this.playerIntro = 'Music is great. It enriches all moments of our lives, full spectrum of them from joy to sorrow. I even wrote this page listening to Lera Lynn! There are many great players, but I chose Ionic-based one for this page in order to get to know it better.'
   }
 
   getAboutMe() {
@@ -143,6 +146,10 @@ export class StaticTextService {
 
   getChartsIntro() {
     return this.chartsIntro;
+  }
+
+  getPlayerIntro() {
+    return this.playerIntro;
   }
 
 }
