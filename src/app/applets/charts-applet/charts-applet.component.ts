@@ -9,11 +9,9 @@ import { StaticTextService } from '../../services/static-text.service';
   providers: [StaticTextService]
 })
 export class ChartsAppletComponent {
-
+  intro: string;
   single: any[];
   multi: any[];
-
-  //view: any[] = [null, 400];
 
   // options
   showXAxis = true;
@@ -33,7 +31,12 @@ export class ChartsAppletComponent {
   autoScale = true;
 
   constructor(staticTextService: StaticTextService) {
-    Object.assign(this, {single: staticTextService.getChartsDataSingle(), multi: staticTextService.getChartsDataMulti()});
+    Object.assign(this, {
+      single: staticTextService.getChartsDataSingle(),
+      multi: staticTextService.getChartsDataMulti()
+    });
+
+    this.intro = staticTextService.getChartsIntro();
   }
 
   onSelect(event) {

@@ -9,6 +9,7 @@ export class StaticTextService {
   copyRight: string;
   title: string;
   aboutMe: string;
+  chartsIntro: string;
 
 
 
@@ -108,6 +109,8 @@ export class StaticTextService {
         ]
       }
     ];
+
+    this.chartsIntro = "I love data visualization! On the most recent project I enjoyed working with Kendo.UI library, but I can work with Chart.js, D3.js and others.";
   }
 
   getAboutMe() {
@@ -136,6 +139,10 @@ export class StaticTextService {
 
   getChartsDataMulti() {
     return this.multi;
+  }
+
+  getChartsIntro() {
+    return this.chartsIntro;
   }
 
 }
