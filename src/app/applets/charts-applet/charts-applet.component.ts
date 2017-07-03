@@ -30,13 +30,13 @@ export class ChartsAppletComponent {
   // line, area
   autoScale = true;
 
-  constructor(staticTextService: StaticTextService) {
+  constructor(_staticTextService: StaticTextService) {
     Object.assign(this, {
-      single: staticTextService.getChartsDataSingle(),
-      multi: staticTextService.getChartsDataMulti()
+      single: _staticTextService.getChartsDataSingle(),
+      multi: _staticTextService.getChartsDataMulti()
     });
 
-    this.intro = staticTextService.getChartsIntro();
+    this.intro = _staticTextService.getChartsIntro();
   }
 
   onSelect(event) {

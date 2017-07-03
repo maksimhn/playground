@@ -1,3 +1,6 @@
+<h5>
+  {{intro}}
+</h5>
 <ion-list>
   <audio-track #audio *ngFor="let track of myTracks"  [track]="track" (onFinish)="onTrackFinished($event)">
     <ion-item>

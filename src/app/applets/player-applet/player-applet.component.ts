@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AudioProvider } from 'ionic-audio';
+import { StaticTextService } from '../../services/static-text.service';
 
 @Component({
   selector: 'app-player-applet',
@@ -7,12 +8,15 @@ import { AudioProvider } from 'ionic-audio';
   styleUrls: ['./player-applet.component.css']
 })
 export class PlayerAppletComponent {
+  intro: string;
   selectedTrack: any;
 
   myTracks: any[];
   allTracks: any[];
 
-  constructor(private _audioProvider: AudioProvider) {
+  constructor(private _audioProvider: AudioProvider, _staticTextService: StaticTextService) {
+    this.intro = _staticTextService.getPlayerIntro();
+
     // plugin won't preload data by default, unless preload property is defined within json object - defaults to 'none'
     this.myTracks = [{
       src: 'https://archive.org/download/JM2013-10-05.flac16/V0/jm2013-10-05-t12-MP3-V0.mp3',
@@ -26,7 +30,7 @@ export class PlayerAppletComponent {
         artist: 'John Mayer',
         title: 'Who Says',
         art: 'img/johnmayer.jpg',
-        preload: 'metadata' // tell the plugin to preload metadata such as duration for this track,  set to 'none' to turn off
+        preload: 'metadata'
       }];
   }
 
@@ -45,7 +49,7 @@ export class PlayerAppletComponent {
     this._audioProvider.pause(this.selectedTrack);
   }
 
-  onTrackFinished(track: any) {
+  static onTrackFinished(track: any) {
     console.log('Track finished', track)
   }
 
