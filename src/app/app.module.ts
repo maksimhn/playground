@@ -9,8 +9,6 @@ import { TilesModule } from './tiles/tiles.module';
 import { AppletsModule } from './applets/applets.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IonicAudioModule, AudioProvider, WebAudioProvider, defaultAudioProviderFactory } from 'ionic-audio';
-import { IonicModule } from 'ionic-angular';
 
 
 @NgModule({
@@ -27,8 +25,6 @@ import { IonicModule } from 'ionic-angular';
     TilesModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(AppComponent),
-    IonicAudioModule.forRoot(defaultAudioProviderFactory)
   ],
   providers: [],
   bootstrap: [ AppComponent ]
