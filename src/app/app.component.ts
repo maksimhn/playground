@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { StaticTextService } from './services/static-text.service';
 import { Router } from '@angular/router';
+import { DynamicDataService } from './services/dynamic-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ],
-  providers: [ StaticTextService ]
+  providers: [ StaticTextService, DynamicDataService ]
 })
 export class AppComponent {
   copyRight: string;
