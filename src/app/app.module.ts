@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -9,6 +9,7 @@ import { TilesModule } from './tiles/tiles.module';
 import { AppletsModule } from './applets/applets.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgUploaderModule } from 'ngx-uploader';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TilesModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgUploaderModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

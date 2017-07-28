@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "name": "playground"
@@ -23,7 +23,7 @@
         "styles.css"
       ],
       "scripts": [
-        "../node_modules/chart.js/dist/Chart.js"
+        
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
