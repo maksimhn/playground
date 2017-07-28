@@ -37,7 +37,7 @@ export class PlayerAppletComponent implements AfterViewInit, OnInit {
   /** Display or not the controls, default: true */
   @Input() controls: boolean = true;
   /** Set autoplay status, default true. */
-  @Input() autoplay: boolean = true;
+  @Input() autoplay: boolean = false;
   /** Set loop status, default false. */
   @Input() loop: boolean = false;
   /** Set the volume, default: 1 (max). */

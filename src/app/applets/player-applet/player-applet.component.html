@@ -14,12 +14,12 @@
   </audio>
   <button type="button" (click)="play()" *ngIf="playButton">Play</button>
   <button type="button" (click)="pause()" *ngIf="pauseButton">Pause</button>
-  <button type="button" (click)="previousTrack()" *ngIf="selectableButton">Previous</button>
-  <button type="button" (click)="nextTrack()" *ngIf="selectableButton">Next</button>
+  <!--<button type="button" (click)="previousTrack()" *ngIf="selectableButton">Previous</button>-->
+  <!--<button type="button" (click)="nextTrack()" *ngIf="selectableButton">Next</button>-->
   <button type="button" (click)="muteVideo()" *ngIf="muteButton">Mute</button>
 
   <br>
   <div *ngFor="let song of audioTracksList">
-    <div (click)="playThis(song.Key)">{{song.Key}}</div>
+    <div (click)="playThis(song.Key)">{{song.Artist}} - {{song.Track}}</div>
   </div>
 </div>
