@@ -24,14 +24,14 @@ export class ImageAppletComponent {
 
         if (output.type === 'allAddedToQueue') { // when all files added in queue
             // uncomment this if you want to auto upload files when added
-             const event: UploadInput = {
-               type: 'uploadAll',
-               url: '/upload',
-               method: 'POST',
-               data: { foo: 'bar' },
-               concurrency: 0
-             };
-             this.uploadInput.emit(event);
+             //const event: UploadInput = {
+             //  type: 'uploadAll',
+             //  url: '/api/image',
+             //  method: 'POST',
+             //  data: { foo: 'bar' },
+             //  concurrency: 0
+             //};
+             //this.uploadInput.emit(event);
         } else if (output.type === 'addedToQueue') {
             this.files.push(output.file); // add file to array when added
         } else if (output.type === 'uploading') {
@@ -53,7 +53,7 @@ export class ImageAppletComponent {
     startUpload(): void {  // manually start uploading
         const event: UploadInput = {
             type: 'uploadAll',
-            url: '/upload',
+            url: 'http://localhost:8080/api/image/upload',
             method: 'POST',
             data: { foo: 'bar' },
             concurrency: 1 // set sequential uploading of files with concurrency 1
