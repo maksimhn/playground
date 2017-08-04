@@ -10,3 +10,21 @@
 <button type="button" class="start-upload-btn" (click)="startUpload()">
   Start Upload
 </button>
+
+<div class="column is-10 is-offset-1" *ngIf="files && files.length">
+  <div class="upload-file" *ngFor="let f of files; let i = index;">
+    <div class="columns">
+      <div class="column is-10">
+        <div class="progress-bar-container">
+          <div class="bar" [style.width]="f.progress.data.percentage + '%'" [ngClass]="{ 'green': f.progress.data.percentage === 100 }"></div>
+        </div>
+      </div>
+      <div class="column is-1 centered">
+        <button type="button" class="button small-button" (click)="cancelUpload(f.id)">Cancel</button>
+      </div>
+      <!--<div class="column is-1 centered">-->
+        <!--<button type="button" class="button small-button" (click)="removeFile(f.id)">Remove</button>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>

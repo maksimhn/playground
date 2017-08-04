@@ -9,12 +9,14 @@ import { VoiceAppletComponent } from './voice-applet/voice-applet.component';
 import { ImageAppletComponent } from './image-applet/image-applet.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgUploaderModule } from 'ngx-uploader';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
       NgxChartsModule,
-      NgUploaderModule
+      NgUploaderModule,
+      FormsModule
   ],
   declarations: [ AppletsComponent, ChartsAppletComponent, BotAppletComponent, ReportAppletComponent, PlayerAppletComponent, VoiceAppletComponent, ImageAppletComponent ]
 })
