@@ -1,4 +1,5 @@
-﻿<div class="drop-container" ngFileDrop (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" [ngClass]="{ 'is-drop-over': dragOver }">
+﻿<div class="drop-container" ngFileDrop (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"
+     [ngClass]="{ 'is-drop-over': dragOver }">
   <h1>Drag & Drop</h1>
 </div>
 
@@ -16,18 +17,18 @@
     <div class="columns">
       <div class="column is-10">
         <div class="progress-bar-container">
-          <div class="bar" [style.width]="f.progress.data.percentage + '%'" [ngClass]="{ 'green': f.progress.data.percentage === 100 }"></div>
+          <div class="bar" [style.width]="f.progress.data.percentage + '%'"
+               [ngClass]="{ 'green': f.progress.data.percentage === 100 }"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="col-xs-12">
-  <div *ngIf="results.length">
-    <div *ngFor="let file of results; let i = fileIndex">
-      <div>{{file.name}}</div>
-      <div><img src="{{file.fullUrl}}" alt=""></div>
-    </div>
+<div class="col-xs-12 col-sm-6" *ngFor="let file of results; let i = index">
+  <div>{{file.name}}</div>
+  <div><img width="320" height="240" src="{{file.fullUrl}}" alt=""></div>
+  <div>
+    <input *ngIf="file.status === 'done'" type="checkbox" [value]="true" [(ngModel)]="results[i].download">
   </div>
 </div>

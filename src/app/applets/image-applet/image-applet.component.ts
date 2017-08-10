@@ -30,7 +30,7 @@ export class ImageAppletComponent {
 
   onUploadOutput(output: UploadOutput): void {
     console.log(output); // lets output to see what's going on in the console
-    this.results.push(output);
+    //this.results.push(output);
 
     if (output.type === 'allAddedToQueue') { // when all files added in queue
       // uncomment this if you want to auto upload files when added
@@ -61,8 +61,9 @@ export class ImageAppletComponent {
       let tempFileData = {
         name: output.file.name,
         index: output.file.fileIndex,
-        clienId: this.clientId,
-        fullUrl: `${this.downloadUrl}${this.clientId}/${output.file.name}`
+        status: output.type,
+        fullUrl: `${this.downloadUrl}${this.clientId}/${output.file.name}`,
+        download: false
       };
       this.results.push(tempFileData);
     }
@@ -76,7 +77,7 @@ export class ImageAppletComponent {
       url: this.uploadUrl,
       method: 'POST',
       data: {clientId: this.clientId},
-      concurrency: 5 // set sequential uploading of files with concurrency 1
+      concurrency: 12 // set sequential uploading of files with concurrency 1
     };
 
     this.uploadInput.emit(event);

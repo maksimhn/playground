@@ -74,7 +74,7 @@ export class PlayerAppletComponent implements AfterViewInit, OnInit {
   constructor(_staticTextService: StaticTextService, _dynamicDataService: DynamicDataService) {
     this.intro = _staticTextService.getPlayerIntro();
 
-    this.urlBase = _dynamicDataService.getUrlBase();
+    this.urlBase = _dynamicDataService.getMusicUrlBase();
 
     _dynamicDataService.getMusicTracks()
       .then((response) => {

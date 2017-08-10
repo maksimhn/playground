@@ -10,6 +10,7 @@ import { AppletsModule } from './applets/applets.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgUploaderModule } from 'ngx-uploader';
+import { WindowRefService } from './services/window-ref.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { NgUploaderModule } from 'ngx-uploader';
     BrowserAnimationsModule,
     NgUploaderModule
   ],
-  providers: [],
+  providers: [ WindowRefService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {
