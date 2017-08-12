@@ -39,16 +39,18 @@ export class DynamicDataService {
     });
     options.responseType = ResponseContentType.Blob;
 
-    this.http.post(options.url, options.body, options)
-      .map(response => {
-        let fileBlob = response.blob();
-        let blob = new Blob([fileBlob], {
-          type: 'application/zip'
-        });
-
-        let url = this._window.URL.createObjectURL(blob);
-        this.sanitizer.bypassSecurityTrustUrl(url);
-      });
+    this.http.post(options.url, options.body).toPromise().then(response => {
+      console.log(response);
+    })
+      //.map(response => {
+      //  let fileBlob = response.blob();
+      //  let blob = new Blob([fileBlob], {
+      //    type: 'application/zip'
+      //  });
+	  //
+      //  let url = this._window.URL.createObjectURL(blob);
+      //  this.sanitizer.bypassSecurityTrustUrl(url);
+      //});
   }
 
 }
