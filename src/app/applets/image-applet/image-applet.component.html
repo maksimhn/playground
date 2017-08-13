@@ -31,7 +31,8 @@
   <div>
     <input *ngIf="file.status === 'done'" type="checkbox" [value]="true" [(ngModel)]="results[i].download">
   </div>
-  <div *ngIf="results.length" class="text-center">
-    <button (click)="downloadArchive()">Download Archive</button>
-  </div>
+</div>
+
+<div *ngIf="results.length" class="col-xs-12 text-center">
+  <button (click)="downloadArchive()">Download Archive</button>
 </div>

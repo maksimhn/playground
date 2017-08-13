@@ -3,6 +3,7 @@ import { Http, Request, RequestMethod, RequestOptions, ResponseContentType } fro
 import 'rxjs/add/operator/toPromise';
 import { WindowRefService } from './window-ref.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
 
 interface AudioTracksList {
   Contents: AudioTrack[];
@@ -15,7 +16,7 @@ export class DynamicDataService {
   private musicApi: string = '/api/music/tracks';
   private imageArchiveApi: string = '/api/image/archive';
 
-  constructor(private http: Http, windowRef: WindowRefService, private sanitizer:DomSanitizer) {
+  constructor(private http: Http, windowRef: WindowRefService, private sanitizer: DomSanitizer) {
     this._window = windowRef.nativeWindow;
   }
 
@@ -27,30 +28,11 @@ export class DynamicDataService {
     return this.host + this.musicApi;
   }
 
-  getImagesArchive(payload: Object) {
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Accept': 'application/zip'
-    });
-    let options = new RequestOptions({
-      method: RequestMethod.Post,
-      url: `${this.host}${this.imageArchiveApi}`,
-      body: payload
-    });
-    options.responseType = ResponseContentType.Blob;
-
-    this.http.post(options.url, options.body).toPromise().then(response => {
-      console.log(response);
-    })
-      //.map(response => {
-      //  let fileBlob = response.blob();
-      //  let blob = new Blob([fileBlob], {
-      //    type: 'application/zip'
-      //  });
-	  //
-      //  let url = this._window.URL.createObjectURL(blob);
-      //  this.sanitizer.bypassSecurityTrustUrl(url);
-      //});
+  getImagesArchive(payload: Object): Observable<Blob> {
+    let options = new RequestOptions({responseType: ResponseContentType.Blob});
+    return this.http.post(`${this.host}${this.imageArchiveApi}`, payload, options)
+      .map(res => {
+        return res.blob();
+      });
   }
-
 }

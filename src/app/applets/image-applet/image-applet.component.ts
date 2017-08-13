@@ -1,6 +1,7 @@
 ﻿import { Component, EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes } from 'ngx-uploader';
 import { DynamicDataService } from '../../services/dynamic-data.service';
+import { saveAs as importedSaveAs } from 'file-saver';
 
 @Component({
   selector: 'app-image-applet',
@@ -35,15 +36,20 @@ export class ImageAppletComponent {
   }
 
   downloadArchive() {
-    let body = [];
+    let imagesNames = [];
     if (this.results.length) {
       this.results.forEach((el) => {
         if (el.download) {
-          body.push(el.name);
+          imagesNames.push(el.name);
         }
       });
     }
-    this._dynamicDataService.getImagesArchive({ body });
+    this._dynamicDataService.getImagesArchive({
+      imagesNames: imagesNames,
+      clientId: this.clientId
+    }).subscribe(blob => {
+      importedSaveAs(blob, 'myImages.zip');
+    });
   }
 
   onUploadOutput(output: UploadOutput): void {
